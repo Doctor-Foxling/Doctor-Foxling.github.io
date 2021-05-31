@@ -1980,6 +1980,13 @@ hr.fancy::before {
   letter-spacing: 0.3em;
 }
 
+figcaption {
+  color: rgb(137, 137, 137);
+  font-style: italic;
+  padding: 0px;
+  text-align: center;
+}
+
 /* ------------------------------------------------------------------- 
  * ## lists
  * ------------------------------------------------------------------- */
