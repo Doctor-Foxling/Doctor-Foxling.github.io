@@ -61,7 +61,7 @@
                 <ul class="s-header__nav">
                     <li><a href="index.html" title="">Home</a></li>
                     <li class="has-children">
-                        <a href="#0" title="">Categories</a>
+                        <a href="#0" title="">Projects</a>
                         <ul class="sub-menu">
                             <li><a href="Becketron-1.html">Game Engine</a></li>
                             <li><a href="category.html">Social-Media Webapp</a></li>
@@ -217,6 +217,12 @@
                                         end up in positions where a custom designed feature is required. Without access to
                                         the source code, this can lead to bottlenecks or the sacrifice of the given feature.<br><br>
                                     </li>
+                                    <li>
+                                        <b>Pleasure</b>: Building a complex software like a game engine can have its own internal
+                                        rewards which can be hard to describe to non-programmer. To a programmer, a game engine is a 
+                                        giant piece of puzzel that needs to be solved and improved. Its like parenting a child, 
+                                        proudly watching as it does impressive things.
+                                    </li>
                                 </ul>
                                 </p>
     
@@ -238,46 +244,42 @@
                             <img src="images/thumbs/Projects/Game Engine/Engine_Architecture.PNG" style="display: block;width:80%;margin-left: auto; margin-right: auto">
                             <figcaption>Becketron Game-Engine architecture</figcaption>
                             <p>
-                            Quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est 
-                            eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas 
-                            assumenda est, omnis dolor repellendus.
+                                The codebase for Becketron Engine (static library) contains the implementation for 
+                                the different modules (e.g., 3D-Renderer, ECS, Physics System etc.) that make up the 
+                                engine. The basic foundation for the GUI (i.e., integration of ImGui library) is also
+                                done within the project Becketron. The GUI components (e.g., Scene Hierarchy panel, 
+                                Viewport etc.) that use the ImGui library are implemented within the ‘Tron’ Editor
+                                 project. Both Sandbox and the Tron Editor have access to asset files (e.g., 
+                                 Textures, Skyboxes) and scene-specific GLSL Shader files. The video below provides 
+                                 a demo walkthrough of the current engine features.
+                                 <br><br>
+
+                                 Nvidia’s <a href="https://www.nvidia.com/en-gb/drivers/physx/physx-9-19-0218-driver/">
+                                    PhysX</a> library is used to implement the physics system within
+                                  the engine. The Rendering system is based on the <a href="https://opengl.org/">OpenGL API</a>, with plans for a
+                                   <a href="https://www.vulkan.org/">Vulcan</a> Implementation. <a href="https://github.com/skypjack/entt">Entt</a>
+                                    library is used for supporting Entity Component 
+                                   System within the engine. <a href="https://github.com/ocornut/imgui/tree/docking">ImGui’s
+                                    docking</a> branch is used to provide 
+                                   window-docking functionality in addition to the other GUI features. Other 
+                                   ibraries, such as <a href="https://github.com/gabime/spdlog">spdlog</a>, 
+                                   <a href="https://github.com/nothings/stb">stb-image</a>, 
+                                   <a href="https://glad.dav1d.de/">GLAD</a> etc. are also used for their 
+                                   respective functionalities (See the <a href="https://github.com/Doctor-Foxling/Becketron/tree/master/Becketron/vendor">vendor</a>
+                                        folder in the engine source code).
                             </p>
-                            
-<pre><code class="language-css">
-    code {
-        font-size: 1.4rem;
-        margin: 0 .2rem;
-        padding: .2rem .6rem;
-        white-space: nowrap;
-        background: #F1F1F1;
-        border: 1px solid #E1E1E1;	
-        border-radius: 3px;
-    }
-</code></pre>
-                                
-                            <p>
-                            Odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti dolores et 
-                            quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa.</p>
-    
-                            <ul>
-                                <li>Donec nulla non metus auctor fringilla.
-                                    <ul>
-                                        <li>Lorem ipsum dolor sit amet.</li>
-                                        <li>Lorem ipsum dolor sit amet.</li>
-                                        <li>Lorem ipsum dolor sit amet.</li>
-                                    </ul>
-                                </li>
-                                <li>Donec nulla non metus auctor fringilla.</li>
-                                <li>Donec nulla non metus auctor fringilla.</li>
-                            </ul>
-    
-                            <p>
-                            Odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti dolores et quas 
-                            molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa. Aenean eu leo quam. 
-                            Pellentesque ornare sem lacinia quam venenatis vestibulum. Nulla vitae elit libero, a pharetra augue 
-                            laboris in sit minim cupidatat ut dolor voluptate enim veniam consequat occaecat fugiat in adipisicing 
-                            in amet Ut nulla nisi non ut enim aliqua laborum mollit quis nostrud sed sed.
-                            </p>
+                            <!--Embedded Video-->
+                            <div class="s-content__media">
+                                <div class="s-content__post-thumb">
+                                    <div class="video-container">
+                                        <iframe src="https://youtube.com/embed/-Rd2gjj72pk" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                                    </div>
+                                    <figcaption>Becketron Game-Engine Current features Demo</figcaption>
+                                </div>
+                            </div> <!-- end s-content__media -->
+
+                            <p>The documentation for the engine can be found <a href="">Here</a>. The open-source
+                            code, which is open to community contribution can be found <a href="">here</a>.</p>
 
                         </div> <!-- end s-entry__entry-content -->
 
@@ -323,13 +325,13 @@
                             <div class="prev-nav">
                                 <a href="#" rel="prev">
                                     <span>Previous</span>
-                                    Tips on Minimalist Design 
+                                    Home 
                                 </a>
                             </div>
                             <div class="next-nav">
                                 <a href="#" rel="next">
                                     <span>Next</span>
-                                    A Practical Guide to a Minimalist Lifestyle.
+                                    Becketron Documentation
                                 </a>
                             </div>
                          </div> <!-- end s-content__pagenav -->
@@ -337,6 +339,28 @@
                     </div> <!-- end s-content__primary -->
                 </article> <!-- end entry -->
 
+            </div> <!-- end column -->
+        </div> <!-- end row -->
+
+        <div class="row">
+            <div class="column large-">
+                <nav class="pgn">
+                    <ul>
+                        <li><a class="pgn__num current" href="Becketron-1.html">1</a></li>
+                        <li><span class="pgn__num ">2</span></li>
+                        <li><a class="pgn__num" href="#0">3</a></li>
+                        <li><a class="pgn__num" href="#0">4</a></li>
+                        <li><a class="pgn__num" href="#0">5</a></li>
+                        <li><span class="pgn__num dots">…</span></li>
+                        <li>
+                            <span class="pgn__next" href="#0">
+                                Next
+                            </span>
+                        </li>
+
+                    </ul>
+                    <span class="pgn__next__desc">(Becketron Documentation)</span>
+                </nav> <!-- end pgn -->
             </div> <!-- end column -->
         </div> <!-- end row -->
 

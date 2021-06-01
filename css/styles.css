@@ -1983,7 +1983,7 @@ hr.fancy::before {
 figcaption {
   color: rgb(137, 137, 137);
   font-style: italic;
-  padding: 0px;
+  margin-top: -20px;
   text-align: center;
 }
 
@@ -2968,7 +2968,8 @@ input::-moz-focus-inner {
 
 .pgn__num::after,
 .pgn__prev::after,
-.pgn__next::after {
+.pgn__next::after,
+.pgn__next__desc::after {
   content: "";
   display: block;
   background-color: black;
@@ -2980,6 +2981,42 @@ input::-moz-focus-inner {
   left: 0;
   bottom: 0;
 }
+
+.pgn__next__desc {
+  font-family: var(--font-1);
+  font-weight: 400;
+  font-size: calc(var(--text-size) * 0.8);
+  color: rgb(120, 119, 119);
+  padding-left: 6px;
+}
+/*
+  display: -ms-inline-flexbox;
+  display: -webkit-inline-box;
+  display: inline-flex;
+  -ms-flex-flow: row wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  flex-flow: row wrap;
+  -ms-flex-pack: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -ms-flex-align: center;
+  -webkit-box-align: center;
+  align-items: center;
+  height: var(--pgn-num-height);
+  line-height: var(--vspace-1);
+  padding: 0;
+  margin: 0;
+  opacity: 1;
+  cursor: pointer;
+  -webkit-transition: all, 0.3s, ease-in-out;
+  transition: all, 0.3s, ease-in-out;
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translate3d(0, -50%, 0);
+  transform: translate3d(0, -50%, 0);
+}
+*/
 
 .pgn__num {
   font-family: var(--font-1);
