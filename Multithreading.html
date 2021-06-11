@@ -302,6 +302,7 @@ printf(<span style="background-color: #fff0f0">&quot;</span><span style="color: 
 
 
                                 <h3>Shell Scripts</h3>
+                                <div class="s-content__page-content">
                                 <!-- HTML generated using hilite.me -->
                                 <div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #007020">echo</span>  <span style="background-color: #fff0f0">&quot;\nEntered the first shell script\n&quot;</span> <span style="color: #888888">#Announce that shell script is executed</span>
 top -H -b -n 1 |grep Threads &gt; Threads.txt <span style="color: #888888">#run the top command in |thread mode &#39;-H&#39;|</span>
@@ -324,7 +325,7 @@ cat Threads.txt <span style="color: #888888"># Output the contents of the text f
 
 <span style="color: #007020">echo</span>  <span style="background-color: #fff0f0">&quot;$C_prog_pid is the process ID of the running executable\n&quot;</span>
 </pre></div><br>
-<figcaption>First Shell Script</figcaption>
+<figcaption>First Shell Script</figcaption></div>
                             <!--End of the first shell script-->
 
                             The codeblock above shows the shell script executed by the C program when the multiple threads are running.
@@ -338,6 +339,7 @@ cat Threads.txt <span style="color: #888888"># Output the contents of the text f
                             and prints it on the terminal.<br><br>
 
                             <!-- HTML generated using hilite.me -->
+                            <div class="s-content__page-content">
 <div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #007020">echo</span> <span style="background-color: #fff0f0">&quot;\nEntered the second shell script\n&quot;</span>
 
     <span style="color: #007020">echo</span> <span style="background-color: #fff0f0">&quot;This is the data put into the second text file\n&quot;</span>
@@ -356,21 +358,233 @@ cat Threads.txt <span style="color: #888888"># Output the contents of the text f
     
     perl search_th.pl <span style="color: #888888"># Run the perl script to Output the data in a summarized fashion</span>
     </pre></div><br>
-    <figcaption>Second Shell Script</figcaption>
+    <figcaption>Second Shell Script</figcaption></div>
                             <!--End of the second shell script-->
-    
+                            The second shell script does essentially the same thing as the first shell script
+                             (after the threads have finished executing) but it also executes the ‘Perl-script’
+                              that Outputs the data stored in the text files in a more readable, user-friendly
+                               fashion.
                             </p>
+
+                            <h3>Perl Script</h3>
+                            <p>This section looks at the Perl-script used to read the data stored in the text 
+                                files and print the data in the terminal, explaining to the non-technical user
+                                 the analysis of the multi-threaded code</p>
+
+                                 <div class="s-content__page-content">
+                            <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #888888">#!/usr/bin/perl</span>
+
+<span style="color: #008800; font-weight: bold">use</span> strict;  
+<span style="color: #008800; font-weight: bold">use</span> warnings;
+
+<span style="color: #008800; font-weight: bold">print</span> <span style="background-color: #fff0f0">&quot;\n\n THE PERL SCRIPT BEGINS \n\n&quot;</span>; <span style="color: #888888">#Annouce the entry into the perl script</span>
+
+<span style="color: #008800; font-weight: bold">my</span> <span style="color: #996633">$Threads_total_before</span>; <span style="color: #888888"># scalar variable for total threads in first text file</span>
+<span style="color: #008800; font-weight: bold">my</span> <span style="color: #996633">$Threads_total_after</span>; <span style="color: #888888"># scalar variable for total threads in the second text file</span>
+<span style="color: #008800; font-weight: bold">my</span> <span style="color: #996633">$Threads_running</span>; <span style="color: #888888"># scalar variable for running threads</span>
+<span style="color: #008800; font-weight: bold">my</span> <span style="color: #996633">$Threads_sleeping</span>; <span style="color: #888888"># scalar variable for running threads</span>
+<span style="color: #008800; font-weight: bold">my</span> <span style="color: #996633">$start_minute</span>; <span style="color: #888888"># scalar variable for start time&#39;s minute part</span>
+<span style="color: #008800; font-weight: bold">my</span> <span style="color: #996633">$start_second</span>; <span style="color: #888888"># scalar variable for start time&#39;s second part</span>
+<span style="color: #008800; font-weight: bold">my</span> <span style="color: #996633">$end_minute</span>; <span style="color: #888888"># scalar variable for end time&#39;s minute part</span>
+<span style="color: #008800; font-weight: bold">my</span> <span style="color: #996633">$end_second</span>; <span style="color: #888888"># scalar variable for end time&#39;s second part </span>
+<span style="color: #008800; font-weight: bold">my</span> <span style="color: #996633">@my_array</span>; <span style="color: #888888">#array variable for storing the words in a row of a file</span>
+<span style="color: #008800; font-weight: bold">my</span> <span style="color: #996633">@start_time</span>; <span style="color: #888888">#array variable for storig the hours,minutes and secs of start time</span>
+<span style="color: #008800; font-weight: bold">my</span> <span style="color: #996633">@end_time</span>; <span style="color: #888888">#array variable for storing the hours,minutes and secs of end time </span>
+<span style="color: #008800; font-weight: bold">my</span> <span style="color: #996633">$row</span>; <span style="color: #888888">#scalar variable for storing the row of a file</span>
+
+<span style="color: #008800; font-weight: bold">my</span> <span style="color: #996633">$filename</span> <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&#39;Threads.txt&#39;</span>; <span style="color: #888888"># name of the text file to be read</span>
+<span style="color: #007020">open</span>(<span style="color: #008800; font-weight: bold">my</span> <span style="color: #996633">$fh</span>,<span style="background-color: #fff0f0">&#39;&lt;:encoding(UTF-8)&#39;</span>,<span style="color: #996633">$filename</span>) <span style="color: #888888">#Open &#39;Threads.txt&#39; as a big string &#39;$fh&#39;</span>
+        <span style="color: #000000; font-weight: bold">or</span> <span style="color: #007020">die</span> <span style="background-color: #fff0f0">&quot;Could not open file &#39;$filename&#39; $!&quot;</span>; <span style="color: #888888"># exit with a message if file can&#39;t open</span>
+
+<span style="color: #008800; font-weight: bold">while</span>( <span style="color: #996633">$row</span> <span style="color: #333333">=</span> <span style="color: #000000; background-color: #fff0ff">&lt;$fh&gt;</span>) <span style="color: #888888">#run a while loop with range equal to the number of rows in $fh string </span>
+{
+<span style="color: #007020">chomp</span> <span style="color: #996633">$row</span>; <span style="color: #888888"># Get rid of any empty newlines</span>
+<span style="color: #996633">@my_array</span><span style="color: #333333">=</span><span style="color: #007020">split</span>(<span style="background-color: #fff0f0">&#39; &#39;</span>,<span style="color: #996633">$row</span>); <span style="color: #888888">#split the words in the row based on &#39;spaces&#39; and store them in @my_array  </span>
+<span style="color: #008800; font-weight: bold">if</span>(<span style="color: #996633">$row</span> <span style="color: #333333">=~</span><span style="color: #000000; background-color: #fff0ff"> /Threads/</span>) <span style="color: #888888"># using regex &#39;=~ //&#39; determine if the word &#39;Thread&#39; appears in the row</span>
+{
+<span style="color: #996633">$Threads_total_before</span><span style="color: #333333">=</span><span style="color: #996633">$my_array</span>[<span style="color: #0000DD; font-weight: bold">1</span>]; <span style="color: #888888">#get the second element of @my_array which is total threads</span>
+<span style="color: #996633">$Threads_running</span><span style="color: #333333">=</span><span style="color: #996633">$my_array</span>[<span style="color: #0000DD; font-weight: bold">3</span>]; <span style="color: #888888">#get the fourth element of @my_array which is running threads</span>
+<span style="color: #996633">$Threads_sleeping</span><span style="color: #333333">=</span><span style="color: #996633">$my_array</span>[<span style="color: #0000DD; font-weight: bold">5</span>];<span style="color: #888888"># get the sixth element of @my_array which is sleeping threads</span>
+}
+<span style="color: #008800; font-weight: bold">elsif</span>(<span style="color: #996633">$row</span> <span style="color: #333333">=~</span><span style="color: #000000; background-color: #fff0ff"> /top/</span>) <span style="color: #888888"># using regex &#39;=~ //&#39; check if the word &#39;top&#39; appears in the row</span>
+{
+ <span style="color: #996633">@start_time</span><span style="color: #333333">=</span><span style="color: #007020">split</span>(<span style="background-color: #fff0f0">&#39;:&#39;</span>,<span style="color: #996633">$my_array</span>[<span style="color: #0000DD; font-weight: bold">2</span>]); <span style="color: #888888">#split digits in the array based on &#39;:&#39; &amp; store in @start_time  </span>
+ <span style="color: #996633">$start_minute</span><span style="color: #333333">=</span><span style="color: #996633">$start_time</span>[<span style="color: #0000DD; font-weight: bold">1</span>]; <span style="color: #888888"># store the 2nd element of @start_time, which is minutes</span>
+ <span style="color: #996633">$start_second</span><span style="color: #333333">=</span><span style="color: #996633">$start_time</span>[<span style="color: #0000DD; font-weight: bold">2</span>]; <span style="color: #888888"># store the 2nd element of @start_time, which is minutes</span>
+}
+
+}
+
+<span style="color: #888888">#      PRINT THE READINGS IN UNDERSTABDABLE TEXT</span>
+<span style="color: #008800; font-weight: bold">print</span> <span style="background-color: #fff0f0">&quot;Total number of threads are $Threads_total_before\n&quot;</span>;
+<span style="color: #008800; font-weight: bold">print</span> <span style="background-color: #fff0f0">&quot;$Threads_running of the $Threads_total_before are running\n&quot;</span>;
+<span style="color: #008800; font-weight: bold">print</span> <span style="background-color: #fff0f0">&quot;$Threads_sleeping threads are taking a nap\n&quot;</span>;
+<span style="color: #008800; font-weight: bold">print</span> <span style="background-color: #fff0f0">&quot;Start minute : $start_minute\n&quot;</span>;
+<span style="color: #008800; font-weight: bold">print</span> <span style="background-color: #fff0f0">&quot;Start second : $start_second\n&quot;</span>;
+
+<span style="color: #008800; font-weight: bold">my</span> <span style="color: #996633">$filename2</span> <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&#39;Threads_after.txt&#39;</span>; <span style="color: #888888"># name of the second file to be read</span>
+<span style="color: #007020">open</span>(<span style="color: #008800; font-weight: bold">my</span> <span style="color: #996633">$fh2</span>,<span style="background-color: #fff0f0">&#39;&lt;:encoding(UTF-8)&#39;</span>,<span style="color: #996633">$filename2</span>)  <span style="color: #888888">#Open &#39;Threads_after.txt&#39; as a big string &#39;$fh2&#39; </span>
+        <span style="color: #000000; font-weight: bold">or</span> <span style="color: #007020">die</span> <span style="background-color: #fff0f0">&quot;Could not open file &#39;$filename&#39; $!&quot;</span>; <span style="color: #888888"># exit with a message if file can&#39;t open</span>
+
+<span style="color: #008800; font-weight: bold">while</span>( <span style="color: #996633">$row</span> <span style="color: #333333">=</span> <span style="color: #000000; background-color: #fff0ff">&lt;$fh2&gt;</span>) <span style="color: #888888"># run a while loop with range equal to the number of rows in $fh2 string</span>
+{
+<span style="color: #007020">chomp</span> <span style="color: #996633">$row</span>; <span style="color: #888888"># Get rid of empty newlines</span>
+<span style="color: #996633">@my_array</span><span style="color: #333333">=</span><span style="color: #007020">split</span>(<span style="background-color: #fff0f0">&#39; &#39;</span>,<span style="color: #996633">$row</span>); <span style="color: #888888">#split the words in the row based on &#39;spaces&#39; and store them in @my_array</span>
+<span style="color: #008800; font-weight: bold">if</span>(<span style="color: #996633">$row</span> <span style="color: #333333">=~</span><span style="color: #000000; background-color: #fff0ff"> /Threads/</span>)  <span style="color: #888888"># using regex &#39;=~ //&#39; check if the word &#39;Thread&#39; appears in the row</span>
+{
+<span style="color: #996633">$Threads_total_after</span><span style="color: #333333">=</span><span style="color: #996633">$my_array</span>[<span style="color: #0000DD; font-weight: bold">1</span>];<span style="color: #888888">#get the second element of @my_array which is total threads </span>
+<span style="color: #996633">$Threads_running</span><span style="color: #333333">=</span><span style="color: #996633">$my_array</span>[<span style="color: #0000DD; font-weight: bold">3</span>];<span style="color: #888888">#get the fourth element of @my_array which is runnning threads</span>
+<span style="color: #996633">$Threads_sleeping</span><span style="color: #333333">=</span><span style="color: #996633">$my_array</span>[<span style="color: #0000DD; font-weight: bold">5</span>];<span style="color: #888888">#get the sixth element of @my_array which is sleeping threads</span>
+}
+<span style="color: #008800; font-weight: bold">elsif</span>(<span style="color: #996633">$row</span> <span style="color: #333333">=~</span><span style="color: #000000; background-color: #fff0ff"> /top/</span>)  <span style="color: #888888"># using regex &#39;=~ //&#39; check if the word &#39;Top&#39; appears in the row</span>
+{
+ <span style="color: #996633">@end_time</span><span style="color: #333333">=</span><span style="color: #007020">split</span>(<span style="background-color: #fff0f0">&#39;:&#39;</span>,<span style="color: #996633">$my_array</span>[<span style="color: #0000DD; font-weight: bold">2</span>]); <span style="color: #888888">#split the words in the @my_array[2] based on &#39;:&#39;  </span>
+
+ <span style="color: #996633">$end_minute</span><span style="color: #333333">=</span><span style="color: #996633">$end_time</span>[<span style="color: #0000DD; font-weight: bold">1</span>]; <span style="color: #888888"># get the second element of end-time, which is minutes</span>
+ <span style="color: #996633">$end_second</span><span style="color: #333333">=</span><span style="color: #996633">$end_time</span>[<span style="color: #0000DD; font-weight: bold">2</span>]; <span style="color: #888888"># get the third element of end-time, which is seconds</span>
+}
+
+}
+
+<span style="color: #888888">#               PRINT THE DATA IN UNDERSTANDABLE TEXT</span>
+<span style="color: #008800; font-weight: bold">print</span> <span style="background-color: #fff0f0">&quot;\nTotal number of threads are $Threads_total_after\n&quot;</span>;
+<span style="color: #008800; font-weight: bold">print</span> <span style="background-color: #fff0f0">&quot;$Threads_running of the $Threads_total_after are running\n&quot;</span>;
+<span style="color: #008800; font-weight: bold">print</span> <span style="background-color: #fff0f0">&quot;$Threads_sleeping threads are taking a nap\n&quot;</span>;
+<span style="color: #008800; font-weight: bold">print</span> <span style="background-color: #fff0f0">&quot;End minute : $end_minute\n&quot;</span>;
+<span style="color: #008800; font-weight: bold">print</span> <span style="background-color: #fff0f0">&quot;End second : $end_second\n&quot;</span>;
+
+<span style="color: #888888"># Get the number of threads spawned by comparing the total threads from both the text file</span>
+<span style="color: #008800; font-weight: bold">my</span> <span style="color: #996633">$number_of_threads</span> <span style="color: #333333">=</span> <span style="color: #996633">$Threads_total_before</span> <span style="color: #333333">-</span> <span style="color: #996633">$Threads_total_after</span>;
+<span style="color: #008800; font-weight: bold">print</span> <span style="background-color: #fff0f0">&quot;\n$number_of_threads threads were created by the executable\n&quot;</span>;
+
+<span style="color: #888888">#Get the time taken for all threads to finish executing by comparing time from both text files</span>
+<span style="color: #008800; font-weight: bold">if</span>(<span style="color: #996633">$end_minute</span> <span style="color: #333333">==</span> <span style="color: #996633">$start_minute</span>) <span style="color: #888888"># If less than a minute was spent</span>
+{
+ <span style="color: #008800; font-weight: bold">my</span> <span style="color: #996633">$diff</span> <span style="color: #333333">=</span> <span style="color: #996633">$end_second</span> <span style="color: #333333">-</span> <span style="color: #996633">$start_second</span>; <span style="color: #888888"># get the time difference</span>
+ <span style="color: #008800; font-weight: bold">print</span> <span style="background-color: #fff0f0">&quot;\n$diff seconds were taken to complete all &quot;</span>,  
+           <span style="background-color: #fff0f0">&quot;the threads spawned by the executable\n&quot;</span>;
+}
+<span style="color: #008800; font-weight: bold">else</span> <span style="color: #888888"># if more than a minute was taken</span>
+{
+ <span style="color: #008800; font-weight: bold">my</span> <span style="color: #996633">$diff</span> <span style="color: #333333">=</span> ((<span style="color: #996633">$end_minute</span> <span style="color: #333333">-</span> <span style="color: #996633">$start_minute</span>) <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">60</span> ) <span style="color: #333333">+</span> 
+		(<span style="color: #996633">$end_second</span> <span style="color: #333333">-</span> <span style="color: #996633">$start_second</span>); <span style="color: #888888"># Get the time difference</span>
+ <span style="color: #008800; font-weight: bold">print</span> <span style="background-color: #fff0f0">&quot;\n$diff seconds were taken to complete all &quot;</span>,
+           <span style="background-color: #fff0f0">&quot;the threads spawned by the executable\n&quot;</span>;	
+}
+
+<span style="color: #008800; font-weight: bold">print</span> <span style="background-color: #fff0f0">&quot; \n\n PERL SCRIPT ENDS \n\n&quot;</span> <span style="color: #888888"># Announce the exit from perl script</span>
+</pre></div><br>
+<figcaption> Perl Script for parsing the stored data</figcaption></div>
+
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~ Perl Script End ~~~~~~~~~~~~~~~~~~~~-->
+
+    The line <code> #!/usr/bin/perl</code> tells the system where the compiler resides, when the script is run using ‘Perl’ command. The ‘strict’ pragma sets certain rules for the programmer that helps writing the correct format of code. For example, unlike most programming languages, Perl doesn’t have a main-loop. The ‘strict’ pragma therefore forces the programmer to declare all variable in a lexical scope. So, a variable declared in a block-of-code (e.g. While-loop) cannot be used outside that block-of-code. The ‘warning’ pragma helps that compiler in the detection of errors and potential problems.
+
+
+<br>
+The variables declared at the top of file are declared outside any block of code so they could be used as global-variables in any block of code. 
+<br><br>
+The <code>open</code> function opens ‘Threads.txt’ file with UTF-8 encoding (UTF-8’s wide range of language support makes it ideal). 
+
+Getting rid of any empty newline, using <code>chomp()</code> function in the while loop, the loop reads through the 2 rows in ‘Threads.txt’. The words in each row are split based on ‘space’ and stored in an array-variable. 
+
+In the first row, the second, fourth and sixth element are used to store the total, running and sleeping threads respectively. In the second row, second element of the array, which is the start time is split based on the symbol ‘:’ and stored in another array. The second third element of the ‘start_time’ array are used to store the minute part and second part of the start time.
+
+<br><br>
+Next, similar steps are followed for opening and reading the second text file. The second text file holds identical information with different values for that variables of interest. The reading and data separation process for the second text file is therefore same as the first text file. 
+
+<pre>
+<code class="language-perl"> #Get the time taken for all threads to finish executing by comparing time from both text files
+if($end_minute == $start_minute) # If less than a minute was spent
+{
+ my $diff = $end_second - $start_second; # get the time difference
+ print "\n$diff seconds were taken to complete all ",  
+           "the threads spawned by the executable\n";
+}
+</code></pre>
+<figcaption>If less than a minute was spent</figcaption>
+<pre>
+<code class="language-perl">
+else # if more than a minute was taken
+{
+my $diff = (($end_minute - $start_minute) * 60 ) + 
+        ($end_second - $start_second); # Get the time difference
+print "\n$diff seconds were taken to complete all ",
+        "the threads spawned by the executable\n";	
+}
+</code></pre>
+<figcaption>If more than a minute was spent</figcaption>
+
+
+The sections above compares the data from the two text files.
+
+It checks the Total number of threads while the Multithreaded program is running and 
+after it has finished Executing.
+
+It also looks at the difference between the Multithreaded-Program start time and end 
+time. To see the total time taken by the whole process
+
+<h3>Running the executable</h3>
+<p>
+    Finally to run the multithreaded-code and get back the background analysis, 
+    the compiled executable of ‘Thread_runner.c’ which is ‘Thread_runner’ is executed
+     in the Terminal by typing: “ ./Thread_runner “ 
+    This will give the following output:
+
+    <img src="C:\Devz\portfolio\Doctor-Foxling.github.io\images\thumbs\Projects\Rpi-Multithreading\Final_Output.png">
     
-                            
-    
+    It can be seen that the total time taken to run the multi-threaded program is 7 seconds.
+     The three threads in the program run for 1 second, 7 second and 5 second respectively, 
+     which totals to 13 seconds. In a single-threaded program, the program would take 13 
+     seconds to run the three functions sequentially, however in this case, the program
+      makes use of the four cores in the Raspberry-pi processor to run each thread on 
+      separate cores. Hence only 7 seconds, which is total time taken by the second thread
+       (i.e. The longest running thread), are used to reach the end of the executable. 
+</p>
                             <blockquote>
                                 <p>
-                                    "I'd rather have a search engine or a compiler on a deserted island than a game."
+                                    "I consider that the golden rule requires that if I like a program I must share it with other people who like it."
                                 </p>
-                                <cite>John Carmack</cite>
+                                <cite>Richard Stallman</cite>
                             </blockquote>
-    
-                            
+    <h3>Importance of Multithreading</h3>
+    <p>
+        We have now reached the stage when CPU clock speeds are no longer increasing, or,
+         have slowed down drastically compared to the exponential rise in the last five 
+         decades. <br><br>
+
+        More’s Law, that states that the number of transistors in a dense integrated circuit, 
+        doubles every year, is no longer applicable to the current trend. This is due to
+         various factors including the reached limit of ‘Dennard scaling’ (that states that
+          the power needing to run transistors in a unit volume stays constant.) meaning that
+           with increasing transistors more power would be needed. The shrinking size of the
+            transistors also makes their accuracy more susceptible to thermal losses which
+             would also be increasing with increasing power supply. <br><br>
+
+        Even with more efficient cooling methods available in the future, the reduction in 
+        transistor size has also nearly reached its limit. The current size of 10-20 
+        nano-meters can be further reduced to 5-7 nano-meters but beyond that quantum
+         effects would prevent the transistor from working properly.
+
+        It is clear that increase in CPU clock speed is not the way forward but rather
+         it is the increase in the number of CPU that would compensate for the need of
+          more computing power needed for the more sophisticated future applications. <br><br>
+
+        Already, processor companies have designed and manufactured CPU’s with over hundred
+         cores but it is the software industry that is now lagging behind. To utilize
+          multiple cores in a system, the software must be written in a multi-threaded
+           fashion that makes use of the available cores. Writing multithreaded code, 
+           however, has proven very difficult with the need to keep track of multiple 
+           threads that share the same memory have access and can make changes to the 
+           same variable. Though this makes the context-switching a lot less expensive
+            between the threads, it also makes the program a lot less predictable and
+             debugging such programs can get very hard. <br><br>
+
+        All in all, despite the lack of elegant multi-threading software solutions at the
+         moment, Multi-threading is nevertheless the future of software programming and
+          extra emphasis must be given to it in learning stages of programmers. <br><br>
+
+    </p>                        
                         </div> <!-- end s-entry__entry-content -->
 
                         <div class="s-content__entry-meta">
@@ -392,19 +606,20 @@ cat Threads.txt <span style="color: #888888"># Output the contents of the text f
                                         <span>In</span> 
                                         <a href="https://en.wikipedia.org/wiki/Computer_programming">Programming</a>
                                         <a href="https://en.wikipedia.org/wiki/Software_design#:~:text=Software%20design%20is%20the%20process,components%20and%20subject%20to%20constraints.&text=%5Bin%5D%20a%20stylized%20software%20engineering,and%20planning%20a%20software%20solution.">Design</a>
-                                        <a href="https://en.wikipedia.org/wiki/Game_engine">Game Engine</a>
+                                        <a href="https://en.wikipedia.org/wiki/Game_engine">Multithreading</a>
                                     </div>
 
                                     <span>On</span>
-                                    May 31, 2021
+                                    June 5, 2021
                                 </div>
 
                                 <div class="entry-tags meta-blk">
                                     <span class="tagtext">Tags</span>
-                                    <a href="#">Game Engine</a>
-                                    <a href="#">OpenGL</a>
-                                    <a href="#">C++</a>
-                                    <a href="#">PhysX</a>
+                                    <a href="#">Multithreading</a>
+                                    <a href="#">Raspberry-pi</a>
+                                    <a href="#">C</a>
+                                    <a href="#">Perl</a>
+                                    <a href="#">Bash</a>
                                 </div>
 
                             </div>
@@ -419,9 +634,9 @@ cat Threads.txt <span style="color: #888888"># Output the contents of the text f
                                 </a>
                             </div>
                             <div class="next-nav">
-                                <a href="#" rel="next">
+                                <a href="Articles/OS_Discussion.html" rel="next">
                                     <span>Next</span>
-                                    Becketron Documentation
+                                    Discussion on OS's
                                 </a>
                             </div>
                          </div> <!-- end s-content__pagenav -->
@@ -436,20 +651,16 @@ cat Threads.txt <span style="color: #888888"># Output the contents of the text f
             <div class="column large-">
                 <nav class="pgn">
                     <ul>
-                        <li><a class="pgn__num current" href="Becketron-1.html">1</a></li>
-                        <li><a class="pgn__num" href="Becketron_Docs/0_Documentation.html">2</a></li>
-                        <li><a class="pgn__num" href="Becketron_Docs/1_Entry_point.html">3</a></li>
-                        <li><a class="pgn__num" href="Becketron_Docs/3_Event_System.html">4</a></li>
-                        <li><a class="pgn__num" href="Becketron_Docs/4_Input-Polling.html">5</a></li>
-                        <li><span class="pgn__num dots">…</span></li>
+                        <li><a class="pgn__num current" href="Multithreading.html">1</a></li>
+                        <li><a class="pgn__num" href="Articles/OS_Discussion.html">2</a></li>
                         <li>
-                            <a class="pgn__next" href="Becketron_Docs/0_Documentation.html">
+                            <a class="pgn__next" href="Articles/OS_Discussion.html">
                                 Next
                             </a>
                         </li>
 
                     </ul>
-                    <span class="pgn__next__desc">(Becketron Documentation)</span>
+                    <span class="pgn__next__desc">(Discussion on OS's)</span>
                 </nav> <!-- end pgn -->
             </div> <!-- end column -->
         </div> <!-- end row -->

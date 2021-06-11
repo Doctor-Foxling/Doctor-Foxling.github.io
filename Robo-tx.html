@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+
+    <!--- basic page needs
+    ================================================== -->
+    <meta charset="utf-8">
+    <title>Becketron Engine</title>
+    <meta name="description" content="A simplistic game-engine, currently supporting OpenGL, PhysX, ImGui etc.">
+    <meta name="author" content="Hamza Khan">
+
+    <!-- mobile specific metas
+    ================================================== -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSS
+    ================================================== -->
+    <link rel="stylesheet" href="css/vendor.css">
+    <link rel="stylesheet" href="css/styles.css">
+
+    <!-- script
+    ================================================== -->
+    <script src="js/modernizr.js"></script>
+    <script defer src="js/fontawesome/all.min.js"></script>
+
+    <!-- favicons
+    ================================================== -->
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="foxling-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="foxling-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+
+</head>
+
+<body id="top">
+
+    <!-- preloader
+    ================================================== -->
+    <div id="preloader"> 
+    	<div id="loader"></div>
+    </div>
+
+
+    <!-- header
+    ================================================== -->
+    <header class="s-header s-header--opaque">
+
+        <div class="s-header__logo">
+            <a class="logo" href="index.html">
+                <img src="images/logo.svg" alt="Homepage">
+            </a>
+        </div>
+
+        <div class="row s-header__navigation">
+
+            <nav class="s-header__nav-wrap">
+
+                <h3 class="s-header__nav-heading h6">Navigate to</h3>
+
+                <ul class="s-header__nav">
+                    <li><a href="index.html" title="">Home</a></li>
+                    <li class="has-children">
+                        <a href="#0" title="">Projects</a>
+                        <ul class="sub-menu">
+                            <li><a href="Becketron-1.html">Game Engine</a></li>
+                            <li><a href="category.html">Social-Media Webapp</a></li>
+                            <li><a href="category.html">Robo-tx</a></li>
+                            <li><a href="category.html">SMD Comp-Counter</a></li>
+                            <li><a href="category.html">Oscilloscope CMD Sim</a></li>
+                            <li><a href="category.html">R-pi Multithreading</a></li>
+                            <li><a href="category.html">R-pi Pixel Mapper</a></li>
+                            <li><a href="#0">PDDL Game</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-children current">
+                        <a href="#0" title="">Blog</a>
+                        <ul class="sub-menu">
+                            <li><a href="single-video.html">Video Post</a></li>
+                            <li><a href="single-audio.html">Audio Post</a></li>
+                            <li><a href="single-standard.html">Standard Post</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="styles.html" title="">Styles</a></li>
+                    <li><a href="about.html" title="">About</a></li>
+                    <li><a href="contact.html" title="">Contact</a></li>
+                </ul> <!-- end s-header__nav -->
+
+                <a href="#0" title="Close Menu" class="s-header__overlay-close close-mobile-menu">Close</a>
+
+            </nav> <!-- end s-header__nav-wrap -->
+
+        </div> <!-- end s-header__navigation -->
+
+        <a class="s-header__toggle-menu" href="#0" title="Menu"><span>Menu</span></a>
+
+        <div class="s-header__search">
+
+            <div class="s-header__search-inner">
+                <div class="row wide">
+
+                    <form role="search" method="get" class="s-header__search-form" action="#">
+                        <label>
+                            <span class="h-screen-reader-text">Search for:</span>
+                            <input type="search" class="s-header__search-field" placeholder="Search for..." value="" name="s" title="Search for:" autocomplete="off">
+                        </label>
+                        <input type="submit" class="s-header__search-submit" value="Search"> 
+                    </form>
+
+                    <a href="#0" title="Close Search" class="s-header__overlay-close">Close</a>
+
+                </div> <!-- end row -->
+            </div> <!-- s-header__search-inner -->
+
+        </div> <!-- end s-header__search wrap -->	
+
+        <a class="s-header__search-trigger" href="#">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17.982 17.983"><path fill="#010101" d="M12.622 13.611l-.209.163A7.607 7.607 0 017.7 15.399C3.454 15.399 0 11.945 0 7.7 0 3.454 3.454 0 7.7 0c4.245 0 7.699 3.454 7.699 7.7a7.613 7.613 0 01-1.626 4.714l-.163.209 4.372 4.371-.989.989-4.371-4.372zM7.7 1.399a6.307 6.307 0 00-6.3 6.3A6.307 6.307 0 007.7 14c3.473 0 6.3-2.827 6.3-6.3a6.308 6.308 0 00-6.3-6.301z"/></svg>
+        </a>
+
+    </header> <!-- end s-header -->
+
+
+    <!-- content
+    ================================================== -->
+    <section class="s-content">
+
+        <div class="row">
+            <div class="column large-12">
+
+                <article class="s-content__entry format-standard">
+
+                    <div class="s-content__media">
+                        <div class="s-content__post-thumb">
+                            <img src="images/thumbs/Projects/Engine2-1100.jpg" 
+                                 srcset="images/thumbs/Projects/Engine2.png 1920w, 
+                                         images/thumbs/Projects/Engine2-1100.jpg 1150w, 
+                                         images/thumbs/Projects/Engine2-525.jpg 525w" sizes="(max-width: 1920px) 100vw, 1920px" alt="">
+                        </div>
+                    </div> <!-- end s-content__media -->
+
+                    <div class="s-content__entry-header">
+                        <h1 class="s-content__title s-content__title--post">Becketron -- Game Engine</h1>
+                    </div> <!-- end s-content__entry-header -->
+
+                    <div class="s-content__primary">
+
+                        <div class="s-content__entry-content">
+
+                            <p>
+                                A game engine is developed as part of this project but before we take an in-depth look,
+                                lets first understand what a game engine is and where the term comes from and why build one in the first place.<br><br>
+                                The concept of a game-engine was introduced by <a href="https://www.idsoftware.com/?/age_gate">ID software</a> with the announcement of
+                                 their game <a href="https://en.wikipedia.org/wiki/Doom_(1993_video_game)">‘Doom’</a> in 1993. The concept involved the separation of the game assets 
+                                 (e.g., 3D models, textures, game-logic etc.) from its core functionality (e.g., 
+                                 the tools used to build the game, the tools to deal with lower-level hardware-requirements
+                                  and drivers, the tools to provide platform abstraction etc). The suite of these 
+                                  tools was termed ‘The game engine’. Over the coming years, ID software released 
+                                  games made with several other engines, licensing the engines to other companies for
+                                   a fee. Other game engines like <a href="https://www.epicgames.com/store/en-US/">Epic Game’s</a> <a href="https://www.unrealengine.com/">Unreal Engine</a>,
+                                    <a href="https://en.wikipedia.org/wiki/Source_(game_engine)">Valve’s Source engine</a> 
+                                   arose around the same time which, over the years, had become full featured 
+                                   development kits and could be licensed to build and realize highly ambitious game ideas. 
+                                <br><br>
+                                The sophistication and features of the game engines themselves began to be used to gauge
+                                 the game industry’s maturity and growth. Game engines nowadays are not just being used 
+                                 for making games but also for serious: medical, military, visualisation, simulation 
+                                 applications etc. Today, popular game engines like Unreal, <a href="https://unity.com/">Unity</a>, 
+                                 <a href="https://www.cryengine.com/">CryEngine</a> etc. are 
+                                 free to use and come with a royalty system that only applies when the game starts 
+                                 generating certain amount of revenue (e.g., Unreal recently changed the $1 million 
+                                 mark to $2 million, for the revenue generated by a game when the company, Epic Games,
+                                  starts taking its 5% fee)
+                                 </p> 
+                            <p>
+                                <img src="images/thumbs/Projects/Game Engine/Game_Engine_General.PNG">
+                            </p>
+    
+                            <p>
+                            The Diagram above shows a general overview of what a game engine is composed of.
+                            </p>
+    
+                            <h2>Why build a Game Engine?</h2>
+    
+                            <p>
+                                So an obvious question to ask an Engine developer is, why? Why build a game engine
+                                 when there are engines like Unity, Unreal, Godot etc. that already provide extremely
+                                  powerful features, are very stable (being around for so long), have decent 
+                                  documentations and what not. <br><br>
+
+                                Well, there are many reasons you might want to build your own game-engine:<br>
+                                
+                                <ul>
+                                    <li>
+                                        <b>Experience</b>: Having to build different complex-components that make up a
+                                        game engine can provide an extremely valuable software development experience.
+                                        Skills gained from such a project can be highly transferable and applied to other
+                                        sophisticated software development projects.<br><br>
+                                    </li>
+                                    <li>
+                                        <b>Easy to specialize</b>: Having first-hand experience in developing the engine
+                                        components can provide an intuitive understanding of what’s under the hood, making
+                                        it easier to specialise the engine for a specific purpose (e.g., Physics Simulation,
+                                        2D-Game making etc.). This applies mainly to the open-source engines, where the 
+                                        source code is available, but the codebase is huge and is contributed to by hundreds
+                                        of developers<br><br>
+                                    </li>
+                                    <li>
+                                        <b>No Strings attached</b>: Having your own game engine can leave you untied to any
+                                        corporate strings and license agreement that might seem reasonable to begin with but can
+                                        be restrictive as the project grows (doesn’t usually applies to indie developers)<br><br>
+                                    </li>
+                                    <li>
+                                        <b>Access to Source code</b>: Popular game engines like Unity, Unreal etc. are
+                                        proprietary engines, and are not open-source. Although, this might not be a problem 
+                                        for most indie developers and small companies, big ambitious projects can, and do 
+                                        end up in positions where a custom designed feature is required. Without access to
+                                        the source code, this can lead to bottlenecks or the sacrifice of the given feature.<br><br>
+                                    </li>
+                                    <li>
+                                        <b>Pleasure</b>: Building a complex software like a game engine can have its own internal
+                                        rewards which can be hard to describe to non-programmer. To a programmer, a game engine is a 
+                                        giant piece of puzzel that needs to be solved and improved. Its like parenting a child, 
+                                        proudly watching as it does impressive things.
+                                    </li>
+                                </ul>
+                                </p>
+    
+                            <blockquote>
+                                <p>
+                                    "I'd rather have a search engine or a compiler on a deserted island than a game."
+                                </p>
+                                <cite>John Carmack</cite>
+                            </blockquote>
+    
+                            <h2>Engine Design</h2>
+    
+                            <p>
+                                The current design of the Becketron Game Engine is composed of three different 
+                                projects, Becketron (static library), Tron (Editor), Sandbox (Testing ground for 
+                                engine features).
+                            </p>
+
+                            <img src="images/thumbs/Projects/Game Engine/Engine_Architecture.PNG" style="display: block;width:80%;margin-left: auto; margin-right: auto">
+                            <figcaption>Becketron Game-Engine architecture</figcaption>
+                            <p>
+                                The codebase for Becketron Engine (static library) contains the implementation for 
+                                the different modules (e.g., 3D-Renderer, ECS, Physics System etc.) that make up the 
+                                engine. The basic foundation for the GUI (i.e., integration of ImGui library) is also
+                                done within the project Becketron. The GUI components (e.g., Scene Hierarchy panel, 
+                                Viewport etc.) that use the ImGui library are implemented within the ‘Tron’ Editor
+                                 project. Both Sandbox and the Tron Editor have access to asset files (e.g., 
+                                 Textures, Skyboxes) and scene-specific GLSL Shader files. The video below provides 
+                                 a demo walkthrough of the current engine features.
+                                 <br><br>
+
+                                 Nvidia’s <a href="https://www.nvidia.com/en-gb/drivers/physx/physx-9-19-0218-driver/">
+                                    PhysX</a> library is used to implement the physics system within
+                                  the engine. The Rendering system is based on the <a href="https://opengl.org/">OpenGL API</a>, with plans for a
+                                   <a href="https://www.vulkan.org/">Vulcan</a> Implementation. <a href="https://github.com/skypjack/entt">Entt</a>
+                                    library is used for supporting Entity Component 
+                                   System within the engine. <a href="https://github.com/ocornut/imgui/tree/docking">ImGui’s
+                                    docking</a> branch is used to provide 
+                                   window-docking functionality in addition to the other GUI features. Other 
+                                   ibraries, such as <a href="https://github.com/gabime/spdlog">spdlog</a>, 
+                                   <a href="https://github.com/nothings/stb">stb-image</a>, 
+                                   <a href="https://glad.dav1d.de/">GLAD</a> etc. are also used for their 
+                                   respective functionalities (See the <a href="https://github.com/Doctor-Foxling/Becketron/tree/master/Becketron/vendor">vendor</a>
+                                        folder in the engine source code).
+                            </p>
+                            <!--Embedded Video-->
+                            <div class="s-content__media">
+                                <div class="s-content__post-thumb">
+                                    <div class="video-container">
+                                        <iframe src="https://youtube.com/embed/-Rd2gjj72pk" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                                    </div>
+                                    <figcaption>Becketron Game-Engine Current features Demo</figcaption>
+                                </div>
+                            </div> <!-- end s-content__media -->
+
+                            <p>The documentation for the engine can be found <a href="">Here</a>. The open-source
+                            code, which is open to community contribution can be found <a href="">here</a>.</p>
+
+                        </div> <!-- end s-entry__entry-content -->
+
+                        <div class="s-content__entry-meta">
+
+                            <div class="entry-author meta-blk">
+                                <div class="author-avatar">
+                                    <img class="avatar" src="images/avatars/My_Avatar.png" alt="">
+                                </div>
+                                <div class="byline">
+                                    <span class="bytext">Posted By</span>
+                                    <a href="#0">Hamza Khan</a>
+                                </div>
+                            </div>
+
+                            <div class="meta-bottom">
+                                
+                                <div class="entry-cat-links meta-blk">
+                                    <div class="cat-links">
+                                        <span>In</span> 
+                                        <a href="https://en.wikipedia.org/wiki/Computer_programming">Programming</a>
+                                        <a href="https://en.wikipedia.org/wiki/Software_design#:~:text=Software%20design%20is%20the%20process,components%20and%20subject%20to%20constraints.&text=%5Bin%5D%20a%20stylized%20software%20engineering,and%20planning%20a%20software%20solution.">Design</a>
+                                        <a href="https://en.wikipedia.org/wiki/Game_engine">Game Engine</a>
+                                    </div>
+
+                                    <span>On</span>
+                                    May 31, 2021
+                                </div>
+
+                                <div class="entry-tags meta-blk">
+                                    <span class="tagtext">Tags</span>
+                                    <a href="#">Game Engine</a>
+                                    <a href="#">OpenGL</a>
+                                    <a href="#">C++</a>
+                                    <a href="#">PhysX</a>
+                                </div>
+
+                            </div>
+
+                        </div> <!-- s-content__entry-meta -->
+
+                        <div class="s-content__pagenav">
+                            <div class="prev-nav">
+                                <a href="#" rel="prev">
+                                    <span>Previous</span>
+                                    Home 
+                                </a>
+                            </div>
+                            <div class="next-nav">
+                                <a href="#" rel="next">
+                                    <span>Next</span>
+                                    Becketron Documentation
+                                </a>
+                            </div>
+                         </div> <!-- end s-content__pagenav -->
+
+                    </div> <!-- end s-content__primary -->
+                </article> <!-- end entry -->
+
+            </div> <!-- end column -->
+        </div> <!-- end row -->
+
+        <div class="row">
+            <div class="column large-">
+                <nav class="pgn">
+                    <ul>
+                        <li><a class="pgn__num current" href="Becketron-1.html">1</a></li>
+                        <li><a class="pgn__num" href="Becketron_Docs/0_Documentation.html">2</a></li>
+                        <li><a class="pgn__num" href="Becketron_Docs/1_Entry_point.html">3</a></li>
+                        <li><a class="pgn__num" href="Becketron_Docs/3_Event_System.html">4</a></li>
+                        <li><a class="pgn__num" href="Becketron_Docs/4_Input-Polling.html">5</a></li>
+                        <li><span class="pgn__num dots">…</span></li>
+                        <li>
+                            <a class="pgn__next" href="Becketron_Docs/0_Documentation.html">
+                                Next
+                            </a>
+                        </li>
+
+                    </ul>
+                    <span class="pgn__next__desc">(Becketron Documentation)</span>
+                </nav> <!-- end pgn -->
+            </div> <!-- end column -->
+        </div> <!-- end row -->
+
+    </section> <!-- end s-content -->
+
+
+    <!-- footer
+    ================================================== -->
+    <footer class="s-footer">
+
+        <div class="s-footer__main">
+
+            <div class="row">
+
+                <div class="column large-3 medium-6 tab-12 s-footer__info">
+
+                    <h5>About My Site</h5>
+
+                    <p>
+                    The Website is a portfolio, showcasing some of the projects I have worked 
+                    on, both, as part of my academic career as well as part of my hobby. The Website 
+                    also provides documentation for some of the projects as well as some of my work 
+                    as an artist.
+                    </p>
+
+                </div> <!-- end s-footer__info -->
+
+                <div class="column large-2 medium-3 tab-6 s-footer__site-links">
+
+                    <h5>Site Links</h5>
+
+                    <ul>
+                        <li><a href="#0">About Me</a></li>
+                        <li><a href="#0">Blog</a></li>
+                        <li><a href="#0">FAQ</a></li>
+                        <li><a href="#0">Terms</a></li>
+                        <li><a href="#0">Privacy Policy</a></li>
+                    </ul>
+
+                </div> <!-- end s-footer__site-links -->  
+
+                <div class="column large-2 medium-3 tab-6 s-footer__social-links">
+
+                    <h5>Follow Us</h5>
+
+                    <ul>
+                        <li><a href="https://www.linkedin.com/in/hamza-khan-b49629173/">Linkedin</a></li>
+                        <li><a href="https://github.com/Doctor-Foxling">Github</a></li>
+                        <li><a href="https://www.instagram.com/some_strange_dude/">Instagram</a></li>
+                        <li><a href="https://www.facebook.com/Age.of.Ace/">Facebook</a></li>
+                        <li><a href="https://www.youtube.com/channel/UCmvr4D0tXu9-Zy-PK_5czpw">Youtube</a></li>
+                    </ul>
+
+                </div> <!-- end s-footer__social links --> 
+
+                <div class="column large-3 medium-6 tab-12 s-footer__subscribe">
+
+                    <h5>Sign Up for Newsletter</h5>
+
+                    <p>Signup to get updates on articles, interviews and events.</p>
+
+                    <div class="subscribe-form">
+                
+                        <form id="mc-form" class="group" novalidate="true">
+
+                            <input type="email" value="" name="dEmail" class="email" id="mc-email" placeholder="Your Email Address" required=""> 
+                
+                            <input type="submit" name="subscribe" value="subscribe" >
+                
+                            <label for="mc-email" class="subscribe-message"></label>
+                
+                        </form>
+
+                    </div>
+
+                </div> <!-- end s-footer__subscribe -->
+
+            </div> <!-- end row -->
+
+        </div> <!-- end s-footer__main -->
+
+        <div class="s-footer__bottom">
+            <div class="row">
+                <div class="column">
+                    <div class="ss-copyright">
+                        <span>© Copyright Calvin 2020</span> 
+                        <span>Design by <a href="https://www.styleshout.com/">StyleShout</a></span>
+                    </div> <!-- end ss-copyright -->
+                </div>
+            </div> 
+
+            <div class="ss-go-top">
+                <a class="smoothscroll" title="Back to Top" href="#top">
+                    <svg viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15"><path d="M7.5 1.5l.354-.354L7.5.793l-.354.353.354.354zm-.354.354l4 4 .708-.708-4-4-.708.708zm0-.708l-4 4 .708.708 4-4-.708-.708zM7 1.5V14h1V1.5H7z" fill="currentColor"></path></svg>
+                </a>
+            </div> <!-- end ss-go-top -->
+        </div> <!-- end s-footer__bottom -->
+
+   </footer> <!-- end s-footer -->
+
+
+    <!-- Java Script
+    ================================================== -->
+    <script src="js/jquery-3.5.0.min.js"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/main.js"></script>
+
+</body>
+
+</html>
