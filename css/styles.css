@@ -1909,12 +1909,13 @@ pre {
   font-family: var(--font-mono);
 }
 
+/*
 pre {
   padding: var(--vspace-0_75) var(--vspace-1) var(--vspace-1);
   background: var(--color-gray-1);
   overflow-x: auto;
 }
-
+*/
 code {
   font-size: var(--text-sm);
   line-height: 1.6rem;
