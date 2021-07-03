@@ -3,14 +3,14 @@
  *
  * ------------------------------------------------------------------- */
 
-(function($) {
+(function ($) {
 
     "use strict";
-    
+
     const cfg = {
-                scrollDuration : 800, // smoothscroll duration
-                mailChimpURL   : ''   // mailchimp url
-                };
+        scrollDuration: 800, // smoothscroll duration
+        mailChimpURL: ''   // mailchimp url
+    };
 
     // Add the User Agent to the <html>
     // will be used for IE10/IE11 detection (Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0; rv:11.0))
@@ -18,21 +18,21 @@
     // doc.setAttribute('data-useragent', navigator.userAgent);
 
 
-   /* Preloader
-    * -------------------------------------------------- */
-    const ssPreloader = function() {
+    /* Preloader
+     * -------------------------------------------------- */
+    const ssPreloader = function () {
 
         const preloader = document.querySelector('#preloader');
         if (!preloader) return;
 
         document.querySelector('html').classList.add('ss-preload');
-        
-        window.addEventListener('load', function() {
-            
+
+        window.addEventListener('load', function () {
+
             document.querySelector('html').classList.remove('ss-preload');
             document.querySelector('html').classList.add('ss-loaded');
 
-            preloader.addEventListener('transitionend', function(e) {
+            preloader.addEventListener('transitionend', function (e) {
                 if (e.target.matches("#preloader")) {
                     this.style.display = 'none';
                 }
@@ -47,27 +47,27 @@
     }; // end ssPreloader
 
 
-   /* Mobile Menu
-    * ---------------------------------------------------- */ 
-    const ssMobileMenu = function() {
+    /* Mobile Menu
+     * ---------------------------------------------------- */
+    const ssMobileMenu = function () {
 
         const $navWrap = $('.s-header__nav-wrap');
         const $closeNavWrap = $navWrap.find('.s-header__overlay-close');
         const $menuToggle = $('.s-header__toggle-menu');
         const $siteBody = $('body');
-        
-        $menuToggle.on('click', function(e) {
+
+        $menuToggle.on('click', function (e) {
             e.preventDefault();
             e.stopPropagation();
 
             $siteBody.addClass('nav-wrap-is-visible');
         });
 
-        $closeNavWrap.on('click', function(e) {
+        $closeNavWrap.on('click', function (e) {
             e.preventDefault();
             e.stopPropagation();
-        
-            if($siteBody.hasClass('nav-wrap-is-visible')) {
+
+            if ($siteBody.hasClass('nav-wrap-is-visible')) {
                 $siteBody.removeClass('nav-wrap-is-visible');
             }
         });
@@ -96,9 +96,9 @@
     }; // end ssMobileMenu
 
 
-   /* Search
-    * ------------------------------------------------------ */
-    const ssSearch = function() {
+    /* Search
+     * ------------------------------------------------------ */
+    const ssSearch = function () {
 
         const searchWrap = document.querySelector('.s-header__search');
         const searchTrigger = document.querySelector('.s-header__search-trigger');
@@ -109,34 +109,34 @@
         const closeSearch = searchWrap.querySelector('.s-header__overlay-close');
         const siteBody = document.querySelector('body');
 
-        searchTrigger.addEventListener('click', function(e) {
+        searchTrigger.addEventListener('click', function (e) {
             e.preventDefault();
             e.stopPropagation();
 
             siteBody.classList.add('search-is-visible');
-            setTimeout(function(){
+            setTimeout(function () {
                 searchWrap.querySelector('.s-header__search-field').focus();
             }, 100);
         });
 
-        closeSearch.addEventListener('click', function(e) {
+        closeSearch.addEventListener('click', function (e) {
             e.stopPropagation();
 
-            if(siteBody.classList.contains('search-is-visible')) {
+            if (siteBody.classList.contains('search-is-visible')) {
                 siteBody.classList.remove('search-is-visible');
-                setTimeout(function(){
+                setTimeout(function () {
                     searchWrap.querySelector('.s-header__search-field').blur();
                 }, 100);
             }
         });
 
-        searchWrap.addEventListener('click', function(e) {
-            if( !(e.target.matches('.s-header__search-inner')) ) {
+        searchWrap.addEventListener('click', function (e) {
+            if (!(e.target.matches('.s-header__search-inner'))) {
                 closeSearch.dispatchEvent(new Event('click'));
             }
         });
 
-        searchField.addEventListener('click', function(e) {
+        searchField.addEventListener('click', function (e) {
             e.stopPropagation();
         })
 
@@ -146,13 +146,13 @@
     }; // end ssSearch
 
 
-   /* Masonry
-    * ------------------------------------------------------ */
-    const ssMasonry = function() {
+    /* Masonry
+     * ------------------------------------------------------ */
+    const ssMasonry = function () {
         const containerBricks = document.querySelector('.bricks-wrapper');
         if (!containerBricks) return;
 
-        imagesLoaded(containerBricks, function() {
+        imagesLoaded(containerBricks, function () {
 
             const msnry = new Masonry(containerBricks, {
                 itemSelector: '.entry',
@@ -166,15 +166,15 @@
     }; // end ssMasonry
 
 
-   /* Slick Slider
-    * ------------------------------------------------------ */
-    const ssSlickSlider = function() {
+    /* Slick Slider
+     * ------------------------------------------------------ */
+    const ssSlickSlider = function () {
 
         const $animateEl = $('.animate-this');
         const $heroSlider = $('.s-hero__slider');
 
-        $heroSlider.on('init', function(event, slick){
-            setTimeout(function() {
+        $heroSlider.on('init', function (event, slick) {
+            setTimeout(function () {
                 $animateEl.first().addClass('animated');
             }, 500);
         });
@@ -190,33 +190,33 @@
             pauseOnHover: false
         });
 
-        $heroSlider.on('beforeChange', function(event, slick, currentSlide){
+        $heroSlider.on('beforeChange', function (event, slick, currentSlide) {
             $animateEl.removeClass('animated');
-        });    
-        $heroSlider.on('afterChange', function(event, slick, currentSlide){
+        });
+        $heroSlider.on('afterChange', function (event, slick, currentSlide) {
             $animateEl.addClass('animated');
         });
 
-        $('.s-hero__arrow-prev').on('click', function() {
+        $('.s-hero__arrow-prev').on('click', function () {
             $heroSlider.slick('slickPrev');
         });
 
-        $('.s-hero__arrow-next').on('click', function() {
+        $('.s-hero__arrow-next').on('click', function () {
             $heroSlider.slick('slickNext');
         });
 
     }; // end ssSlickSlider
 
 
-   /* Animate on Scroll
-    * ------------------------------------------------------ */
-    const ssAOS = function() {
-        
-        AOS.init( {
-            offset: 100,
+    /* Animate on Scroll
+     * ------------------------------------------------------ */
+    const ssAOS = function () {
+
+        AOS.init({
+            offset: -500,
             duration: 800,
             easing: 'ease-in-out',
-            delay: 400,
+            delay: 500,
             once: true,
             disable: 'mobile'
         });
@@ -224,23 +224,23 @@
     }; // end ssAOS
 
 
-   /* Alert Boxes
-    * ------------------------------------------------------ */
-    const ssAlertBoxes = function() {
+    /* Alert Boxes
+     * ------------------------------------------------------ */
+    const ssAlertBoxes = function () {
 
         const boxes = document.querySelectorAll('.alert-box');
 
-        boxes.forEach(function(box) {
+        boxes.forEach(function (box) {
 
-            box.addEventListener('click', function(e){
+            box.addEventListener('click', function (e) {
                 if (e.target.matches(".alert-box__close")) {
                     e.stopPropagation();
                     e.target.parentElement.classList.add("hideit");
 
-                    setTimeout(function() {
+                    setTimeout(function () {
                         box.style.display = "none";
                     }, 500)
-                }    
+                }
             });
 
         })
@@ -248,14 +248,14 @@
     }; // end ssAlertBoxes
 
 
-   /* Smooth Scrolling
-    * ------------------------------------------------------ */
-    const ssSmoothScroll = function() {
-        
+    /* Smooth Scrolling
+     * ------------------------------------------------------ */
+    const ssSmoothScroll = function () {
+
         $('.smoothscroll').on('click', function (e) {
             const target = this.hash;
             const $target = $(target);
-            
+
             e.preventDefault();
             e.stopPropagation();
 
@@ -269,9 +269,9 @@
     }; // end ssSmoothScroll
 
 
-   /* Back to Top
-    * ------------------------------------------------------ */
-    const ssBackToTop = function() {
+    /* Back to Top
+     * ------------------------------------------------------ */
+    const ssBackToTop = function () {
 
         const pxShow = 900;
         const goTopButton = document.querySelector(".ss-go-top");
@@ -281,9 +281,9 @@
         // Show or hide the button
         if (window.scrollY >= pxShow) goTopButton.classList.add("link-is-visible");
 
-        window.addEventListener('scroll', function() {
+        window.addEventListener('scroll', function () {
             if (window.scrollY >= pxShow) {
-                if(!goTopButton.classList.contains('link-is-visible')) goTopButton.classList.add("link-is-visible")
+                if (!goTopButton.classList.contains('link-is-visible')) goTopButton.classList.add("link-is-visible")
             } else {
                 goTopButton.classList.remove("link-is-visible")
             }
@@ -293,8 +293,8 @@
 
 
 
-   /* initialize
-    * ------------------------------------------------------ */
+    /* initialize
+     * ------------------------------------------------------ */
     (function ssInit() {
 
         ssPreloader();
